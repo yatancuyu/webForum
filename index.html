@@ -1,31 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Wellcome to Forum</title>
-  <style>
-    #password_inputer {position: absolute;
-    top: 375px;
-    left: 800px;
-    width: 145px;
-    height: 25px;
-    font-size: 16px}
-
-    #input {position: absolute;
-    top: 420px;
-    left: 800px;
-    width: 150px;
-    height: 25px;}
-
-    .alert {
-      background-color: aqua;
-      height: 50px;
-    }
-      </style>
-</head>
-<body>
-    <div class="alert alert-primary" role="alert"></div>
-</body>
-</html>
+<!DOCTYPE html> 
+    <html lang="en"> 
+        <head> 
+            <meta charset="UTF-8"> 
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+            <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+            <title>Document</title>
+            <style>
+                table{
+                   border-top-color: aqua;
+                   border-top-width: 10px; 
+                }
+            </style>
+        </head> 
+        <body> 
+            {%for item in sectoins['sectoins']%} 
+            <table> 
+                <tr> 
+                    <th>{{item['name']}}</th> 
+                    {%for topic in topics['topics']%} 
+                    <a href={{topic['way']}}><th>{{topic['name']}}</th></a> 
+                </tr> 
+            </table> 
+        </body> 
+    </html>
