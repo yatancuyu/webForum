@@ -10,16 +10,26 @@
                    border-top-color: aqua;
                    border-top-width: 10px; 
                 }
+
+                .alert {
+                    background-color: aqua;
+                    height: 50px;
+                }
             </style>
         </head> 
         <body> 
-            {%for item in sectoins['sectoins']%} 
+            {% for item in sectoins['sectoins'] %} 
             <table> 
                 <tr> 
                     <th>{{item['name']}}</th> 
-                    {%for topic in topics['topics']%} 
+                    {% for topic in topics['topics'] %} 
                     <a href={{topic['way']}}><th>{{topic['name']}}</th></a> 
+                    {% endfor %}
                 </tr> 
             </table> 
+            {% endfor %}
+            <div class="alert alert-primary" role="alert">
+                <img, scr='#', title='VK', alt='VK', width="40", height="40">
+            </div>
         </body> 
     </html>
