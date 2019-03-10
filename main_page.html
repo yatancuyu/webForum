@@ -15,6 +15,12 @@
                     background-color: aqua;
                     height: 50px;
                 }
+
+                #info {
+                    float: right;
+                    margin-right: 10px;
+                    margin-top: 7px;
+                    text-align: center}
             </style>
         </head> 
         <body> 
@@ -23,13 +29,9 @@
                 <tr> 
                     <th>{{item['name']}}</th> 
                     {% for topic in topics['topics'] %} 
-                    <a href={{topic['way']}}><th>{{topic['name']}}</th></a> 
+                    <a href={{topic['way']}}><tr>{{topic['name']}}</tr></a> 
                     {% endfor %}
                 </tr> 
             </table> 
-            {% endfor %}
-            <div class="alert alert-primary" role="alert">
-                <img, scr='#', title='VK', alt='VK', width="40", height="40">
-            </div>
         </body> 
     </html>
