@@ -5,6 +5,7 @@ from wtforms import StringField, SubmitField, PasswordField, SelectField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from db_workspace import DataBase
 import sqlite3
+import datetime
 
 db = DataBase(sqlite3.connect('forum.db', check_same_thread=False))
 
@@ -119,11 +120,13 @@ def add_topic(section):
     if request.method == 'GET':
         return render_template('add_topic.html', section_name=section)
     elif request.method == 'POST':
+        db.insert_topic(db.get_sections_info(db.get_sections_info(section)[0]), request.form['WTF'], request.form['about'], 'ЗАМЕНИТЬ', '14.04.2019')
         print(request.form['WTF'])
         print(request.form['about'])
+        print(db.get_sections_info(section))
         return render_template("section.html", title=section, section=db.get_sections_info(section)[1],
                                sec=section,
-                               topics=db.get_topics_info(db.get_sections_info(section)[0]),str=str)
+                               topics=db.get_topics_info(db.get_sections_info(section)[0]), str=str)
 
 
 
