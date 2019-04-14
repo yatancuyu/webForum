@@ -99,7 +99,7 @@ def signout():
     return redirect("\main")
 
 
-@app.route('/section/<string:section>')
+@app.route('/section/<string:section>/')
 def section(section):
     print(section)
     if section in [i[2] for i in db.get_sections_info()]:
@@ -112,6 +112,20 @@ def section(section):
 def topic(section, topic_id):
     db.plus_view(topic_id)
     return render_template("topic.html")
+
+
+@app.route('/section/<section>/add_topic', methods=['POST', 'GET'])
+def add_topic(section):
+    if request.method == 'GET':
+        return render_template('add_topic.html', section_name=section)
+    elif request.method == 'POST':
+        print(request.form['WTF'])
+        print(request.form['about'])
+        return render_template("section.html", title=section, section=db.get_sections_info(section)[1],
+                               sec=section,
+                               topics=db.get_topics_info(db.get_sections_info(section)[0]),str=str)
+
+
 
 
 if __name__ == '__main__':
