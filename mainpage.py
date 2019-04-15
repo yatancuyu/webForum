@@ -102,17 +102,23 @@ def signout():
 
 @app.route('/section/<string:section>/')
 def section(section):
-    print(section)
+    print(db.get_topics_info(db.get_sections_info(section)[0]))
     if section in [i[2] for i in db.get_sections_info()]:
         return render_template("section.html", title=section, section=db.get_sections_info(section)[1],
                                sec=section,
-                               topics=db.get_topics_info(db.get_sections_info(section)[0]),str=str)
+                               topics=db.get_topics_info(db.get_sections_info(section)[0]), str=str)
 
 
-@app.route('/section/<section>/<int:topic_id>')
+@app.route('/section/<section>/<int:topic_id>', methods=['POST', 'GET'])
 def topic(section, topic_id):
-    db.plus_view(topic_id)
-    return render_template("topic.html")
+    if request.method == 'GET':
+        mass = db.get_messages(topic_id)
+        return render_template('topic.html', messages=mass)
+    elif request.method == 'POST':
+        db.insert_message(1, int(topic_id), request.form['message'], '14.04.2019')
+        mass = db.get_messages(topic_id)
+        return redirect('/section/{}/{}'.format(section, topic_id))
+
 
 
 @app.route('/section/<section>/add_topic', methods=['POST', 'GET'])
@@ -121,12 +127,7 @@ def add_topic(section):
         return render_template('add_topic.html', section_name=section)
     elif request.method == 'POST':
         db.insert_topic(int(db.get_sections_info(section)[0]), request.form['WTF'], request.form['about'], 'ЗАМЕНИТЬ', '14.04.2019')
-        print(request.form['WTF'])
-        print(request.form['about'])
-        print(db.get_sections_info(section)[0])
-        return render_template("section.html", title=section, section=db.get_sections_info(section)[1],
-                               sec=section,
-                               topics=db.get_topics_info(db.get_sections_info(section)[0]), str=str)
+        return redirect('/section/{}'.format(section))
 
 
 
