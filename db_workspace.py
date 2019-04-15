@@ -92,6 +92,14 @@ class DataBase:
         rows = cursor.fetchall()
         return rows
 
+    def insert_message(self, user_id, topic_id, content, date):
+        cursor = self.conn.cursor()
+        cursor.execute('''INSERT INTO messages
+                          (user_id, topic_id, content,date) 
+                          VALUES (?,?,?,?)''', (user_id, topic_id, content, date))
+        cursor.close()
+        self.conn.commit()
+
     def plus_view(self, topic_id):
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM topics WHERE id = ?",
@@ -100,6 +108,17 @@ class DataBase:
         cursor.execute('''UPDATE topics SET views = ? WHERE id = ?''', (str(row+1), str(topic_id),))
         cursor.close()
         self.conn.commit()
+
+    def get_messages(self, topic_id):
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT * FROM messages WHERE topic_id = ?",
+                       (str(topic_id),))
+        rows = cursor.fetchall()
+        cursor.close()
+        self.conn.commit()
+        m = [i for i in rows]
+        return m
+
 
     def get_sections_info(self, title=False):
         cursor = self.conn.cursor()
