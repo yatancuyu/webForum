@@ -45,7 +45,12 @@ class DataBase:
     def __del__(self):
         self.conn.close()
 
-    def get_usernames(self):
+    def get_usernames(self, user_id=False):
+        if user_id:
+            cursor.execute("SELECT * FROM users WHERE id = ?",
+                       (str(user_id)))
+            row = cursor.fetchone()
+            return row[1]
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM users")
         rows = cursor.fetchall()
