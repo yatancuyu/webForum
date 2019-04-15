@@ -5,7 +5,7 @@ from wtforms import StringField, SubmitField, PasswordField, SelectField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from db_workspace import DataBase
 import sqlite3
-import datetime
+from datetime import datetime
 
 db = DataBase(sqlite3.connect('forum.db', check_same_thread=False))
 
@@ -55,7 +55,6 @@ class SignupForm(FlaskForm):
         if not field.data:
             raise ValidationError('Это поле обязательно к заполнению.')
         if field.data in db.get_usernames():
-            print(db.get_usernames())
             raise ValidationError('Это имя уже занято.')
 
 
@@ -102,7 +101,6 @@ def signout():
 
 @app.route('/section/<string:section>/')
 def section(section):
-    print(db.get_topics_info(db.get_sections_info(section)[0]))
     if section in [i[2] for i in db.get_sections_info()]:
         return render_template("section.html", title=section, section=db.get_sections_info(section)[1],
                                sec=section,
@@ -114,9 +112,11 @@ def topic(section, topic_id):
     if request.method == 'GET':
         mass = db.get_messages(topic_id)
         return render_template('topic.html', messages=mass)
-    elif request.method == 'POST':
-        db.insert_message(1, int(topic_id), request.form['message'], '14.04.2019')
+    elif request.method == 'POST' and session["username"]:
+        db.insert_message(session['username'], int(topic_id), request.form['message'], ''.join(str(datetime.now()).split('.')[:-1]))
         mass = db.get_messages(topic_id)
+        return redirect('/section/{}/{}'.format(section, topic_id))
+    else:
         return redirect('/section/{}/{}'.format(section, topic_id))
 
 
@@ -125,10 +125,11 @@ def topic(section, topic_id):
 def add_topic(section):
     if request.method == 'GET':
         return render_template('add_topic.html', section_name=section)
-    elif request.method == 'POST':
-        db.insert_topic(int(db.get_sections_info(section)[0]), request.form['WTF'], request.form['about'], 'ЗАМЕНИТЬ', '14.04.2019')
+    elif request.method == 'POST' and session["username"]:
+        db.insert_topic(int(db.get_sections_info(section)[0]), request.form['WTF'], request.form['about'], session["username"], ''.join(str(datetime.now()).split('.')[:-1]))
         return redirect('/section/{}'.format(section))
-
+    else:
+        return redirect('/section/{}'.format(section))
 
 
 
