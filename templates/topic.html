@@ -3,60 +3,37 @@
 {% block content %}
 
 
-<div id="main">
-		<div class="content">
 
 
-<div id="bbpress-forums">
-
-
-
-
-
-
-<ul id="bbp-topic-119207-lead" class="bbp-lead-topic">
-
-	<li class="bbp-body">
-
-		<div id="post-119207" class="loop-item--1 user-id-7062620 bbp-parent-forum-650 even  post-119207 topic type-topic status-publish hentry topic-tag-page">
-
-			<div class="bbp-topic-author">
-
-
-				<a href="https://bbpress.org/forums/profile/theeponymus/" title="View Fulgence Ridal&#039;s profile" class="bbp-author-link"><span  class="bbp-author-avatar"><img alt='' src='https://secure.gravatar.com/avatar/06fc35ff52118f2cd118bfba32bddd58?s=100&#038;d=retro&#038;r=g' srcset='https://secure.gravatar.com/avatar/06fc35ff52118f2cd118bfba32bddd58?s=200&#038;d=retro&#038;r=g 2x' class='avatar avatar-100 photo' height='100' width='100' /></span><br /><span  class="bbp-author-name">Fulgence Ridal</span></a><div class="bbp-author-role">Participant</div>
-				<p class="bbp-user-nicename">@theeponymus</p>
-				<p class="bbp-topic-post-date"><a href="https://bbpress.org/forums/topic/page-php-as-template/" title="#119207" class="bbp-topic-permalink">6 years, 4 months ago</a></p>
-
-
-
-			</div><!-- .bbp-topic-author -->
-
-			<div class="bbp-topic-content">
-
-
-				<p>Hello,</p>
-<p>it seems that bbpress use page.php as template to show the forum &#8230;<br />
-is there a way to create a custom page as template ?</p>
-<p>thx</p>
-
-
-			</div><!-- .bbp-topic-content -->
-
-			<span class="bbp-admin-links"></span>
-		</div><!-- #post-119207 -->
-
-	</li><!-- .bbp-body -->
-
-</ul><!-- #topic-119207-replies -->
+			<table width="90%" align="left" border="solid">
+				<tr>
+					<th width="20%">автор</th>
+					<th>сообщение</th>
+				</tr>
+				{%for i in messages%}
+				<tr>
+					<td>
+						user: {{i[0]}}
+						<br>
+						date: {{i[3]}}
+					</td>
+					<td>
+						{{i[2]}}
+					</td>
+				</tr>
+				{%endfor%}
+			</table>
+			<form method="post">
+				<textarea name="message" rows="8"></textarea><br>
+				<button type="submit">послать</button>
+			</form>
 
 
 
 
 
-<div class="bbp-pagination">
-	<div class="bbp-pagination-count">Viewing 15 replies - 1 through 15 (of 15 total)</div>
-	<div class="bbp-pagination-links"></div>
-</div>
+
+
 
 
 
