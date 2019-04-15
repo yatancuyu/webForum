@@ -45,12 +45,7 @@ class DataBase:
     def __del__(self):
         self.conn.close()
 
-    def get_usernames(self, user_id=False):
-        if user_id:
-            cursor.execute("SELECT * FROM users WHERE id = ?",
-                       (str(user_id)))
-            row = cursor.fetchone()
-            return row[1]
+    def get_usernames(self):
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM users")
         rows = cursor.fetchall()
@@ -110,7 +105,7 @@ class DataBase:
         cursor.execute("SELECT * FROM topics WHERE id = ?",
                        (str(topic_id),))
         row = int(cursor.fetchone()[-1])
-        cursor.execute('''UPDATE topics SET views = ? WHERE id = ?''', (str(row+1), str(topic_id),))
+        cursor.execute('''UPDATE topics SET views = ? WHERE id = ?''', (str(row + 1), str(topic_id),))
         cursor.close()
         self.conn.commit()
 
@@ -123,7 +118,6 @@ class DataBase:
         self.conn.commit()
         m = [i for i in rows]
         return m
-
 
     def get_sections_info(self, title=False):
         cursor = self.conn.cursor()
