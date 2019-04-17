@@ -111,8 +111,9 @@ def section(section):
 def topic(section, topic_id):
     if request.method == 'GET':
         mass = db.get_messages(topic_id)
-        return render_template('topic.html', messages=mass)
-    elif request.method == 'POST' and session["username"]:
+        print(mass)
+        return render_template('topic.html', messages=mass, session=session)
+    elif request.method == 'POST':
         db.insert_message(session['username'], int(topic_id), request.form['message'], ''.join(str(datetime.now()).split('.')[:-1]))
         mass = db.get_messages(topic_id)
         return redirect('/section/{}/{}'.format(section, topic_id))
@@ -124,8 +125,8 @@ def topic(section, topic_id):
 @app.route('/section/<section>/add_topic', methods=['POST', 'GET'])
 def add_topic(section):
     if request.method == 'GET':
-        return render_template('add_topic.html', section_name=section)
-    elif request.method == 'POST' and session["username"]:
+        return render_template('add_topic.html', section_name=section, session=session)
+    elif request.method == 'POST':
         db.insert_topic(int(db.get_sections_info(section)[0]), request.form['WTF'], request.form['about'], session["username"], ''.join(str(datetime.now()).split('.')[:-1]))
         return redirect('/section/{}'.format(section))
     else:
