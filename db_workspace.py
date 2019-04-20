@@ -153,11 +153,14 @@ class DataBase:
         row = cursor.fetchone()
         return (True, row[0]) if row else (False,)
 
-    def delete(self, id):
+    def delete(self, name):
         cursor = self.conn.cursor()
-        cursor.execute('''DELETE FROM news WHERE id = ?''', (str(id)))
+        cursor.execute('''DELETE FROM users WHERE username = ?''', (name,))
+        cursor.execute('''DELETE FROM topics WHERE author = ?''', (name,))
+        cursor.execute('''DELETE FROM messages WHERE user_id = ?''', (name,))
         cursor.close()
         self.conn.commit()
+        return 1
 
 
 if __name__ == '__main__':
