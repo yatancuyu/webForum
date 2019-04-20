@@ -1,0 +1,216 @@
+﻿html, td, th, h1, h2, h3, h4, h5, h6, button, textarea, input {
+    font: normal 18px "Segoe UI", Tahoma, Arial;
+}
+
+html, body, div, ul, li, p, menu, h1, h2, h3, h4, h5, h6, hr {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #6d3d3d;
+}
+
+h2, h3 {
+    font-size: 28px;
+}
+
+h1, h3, h5 {
+    color: #6d3d3d;
+}
+
+hr {
+    color: #6d3d3d;
+}
+
+a {
+    color: #6d3d3d;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: 600px;
+    color: #6d3d3d;
+    background: #fff;
+    z-index: 100;
+    box-shadow: 0 0 10px #ddd;
+}
+
+    header .text {
+        padding: 20px;
+    }
+
+    header a:hover {
+        text-decoration: none;
+    }
+
+        header a:hover .text {
+            color: #fff;
+            background-color: #6d3d3d;
+        }
+
+        header .filler {
+            flex-grow: 1;
+        }
+
+.page {
+    min-height: 100vh;
+    padding: 0 10px;
+}
+
+    .page .title {
+        color: #6d3d3d;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+
+#content {
+    text-align: center;
+}
+
+.notification,
+.notification .close {
+    position: relative;
+    padding: 10px;
+    margin: 5px 0;
+    color: #555;
+    border-radius: 4px;
+}
+
+    .notification .close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        padding: 0px 7px;
+        cursor: pointer;
+    }
+
+        .notification .close:after {
+            content: "X";
+        }
+
+.error,
+.error .close {
+    background: #ffecec;
+    border: 1px solid #f5aca6;
+}
+
+.success,
+.success .close {
+    background: #e9ffd9;
+    border: 1px solid #a6ca8a;
+}
+
+.warning,
+.warning .close {
+    background: #fff8c4;
+    border: 1px solid #f2c779;
+}
+
+.notice,
+.notice .close {
+    background: #e3f7fc;
+    border: 1px solid #8ed9f6;
+}
+
+
+.button {
+    background-color: #fff;
+    color: #6d3d3d;
+    transition: all 0.1s linear 0s;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: solid 1px #6d3d3d;
+}
+
+    .button:hover {
+        background-color: #6d3d3d;
+        color: #fff;
+    }
+
+textarea {
+    border-radius: 4px;
+    border: solid 1px #6d3d3d;
+    resize: none;
+}
+
+.radio:not(checked),
+.checkbox:not(checked) {
+    position: absolute;
+    opacity: 0;
+}
+
+    .radio:not(checked) + label,
+    .checkbox:not(checked) + label {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+    }
+
+        .radio:not(checked) + label:before,
+        .checkbox:not(checked) + label:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border: solid 1px #6d3d3d;
+            background: #fff;
+        }
+
+        .radio:not(checked) + label:before {
+            border-radius: 50%;
+        }
+
+        .checkbox:not(checked) + label:before {
+            border-radius: 4px;
+        }
+
+        .radio:not(checked) + label:after,
+        .checkbox:not(checked) + label:after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 14px;
+            height: 14px;
+            background: #6d3d3d;
+            opacity: 0;
+        }
+
+        .radio:not(checked) + label:after {
+            border-radius: 50%;
+        }
+
+        .checkbox:not(checked) + label:after {
+            border-radius: 2px;
+        }
+
+.radio:checked + label:after,
+.checkbox:checked + label:after {
+    opacity: 1;
+}
+
+.center {
+   padding: 0;
+    line-height: 100vh;
+}
+
+.center-inner {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}

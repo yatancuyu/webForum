@@ -1,14 +1,27 @@
-<div class="form-group">
-	<h1>Создание темы</h1>
+{% extends "base.html" %}
+{% block content %}
+<div align="center">
+	<br>
 	<form method="post">
-		<label for="header">Заголовок: </label>
-		<textarea class="form-control" id="header" rows="1" name="WTF"></textarea>
-		<br>
-		<label for="sec">Раздел: </label>{{section_name}}
-		<br>
-		<label for="all_text">Топикстарт: </label>
-		<textarea class="form-control" id="all_text" rows="10" name="about"></textarea>
-		<br>
-		<button type="submit" class="form-control">Создать</button>
+		<table width="50%">
+			<tr>
+				<td width="15%"><b>Заголовок:</b></td>
+				<td width="85%"><textarea class="form-control" id="header" rows="1" name="WTF" cols="100"></textarea></td>
+			</tr>
+			<tr>
+				<td><b>Раздел:</b></td>
+				<td><u>{{section_name}}</u></td>
+			</tr>
+			<tr>
+				<td><b>Топикстарт:</b></td>
+				<td><textarea class="form-control" id="all_text" rows="5" name="about" cols="100"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="Создать тему" class="button">
+				</td>
+			</tr>
+		</table>
 	</form>
 </div>
+{% endblock %}
