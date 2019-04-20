@@ -9,11 +9,12 @@ from datetime import datetime
 
 db = DataBase(sqlite3.connect('forum.db', check_same_thread=False))
 
+admins = ['Vladislav', 'a_makushin']
 
 class SigninForm(FlaskForm):
     username = StringField('Введите логин.', validators=[DataRequired('Это поле обязательно к заполнению.')])
     password = PasswordField('Введите пароль.', validators=[DataRequired('Это поле обязательно к заполнению.')])
-    submit = SubmitField('Войти.')
+    submit = SubmitField('Войти')
 
     def validate_username(self, field):
         if field.data not in db.get_usernames():
@@ -39,7 +40,7 @@ class SignupForm(FlaskForm):
                                     ])
     answer = StringField('Введите ответ на секретный вопрос',
                          validators=[DataRequired('Это поле обязательно к заполнению.')])
-    submit = SubmitField('Зарегестрироваться.')
+    submit = SubmitField('Зарегестрироваться')
 
     def validate_password(self, field):
         if not (8 <= len(field.data) <= 16):
@@ -111,6 +112,7 @@ def section(section):
 def topic(section, topic_id):
     if request.method == 'GET':
         mass = db.get_messages(topic_id)
+        db.plus_view(topic_id)
         print(mass)
         return render_template('topic.html', messages=mass, session=session)
     elif request.method == 'POST':
@@ -131,6 +133,15 @@ def add_topic(section):
         return redirect('/section/{}'.format(section))
     else:
         return redirect('/section/{}'.format(section))
+
+
+@app.route('/del_user', methods=['POST', 'GET'])
+def del_user():
+    if request.method == 'GET':
+        return render_template('admin.html', session=session, admins=admins)
+    elif request.method == 'POST':
+        db.delete(request.form['user'])
+        return redirect('/main')
 
 
 
