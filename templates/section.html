@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<table border="solid" cellpadding="5" cellspacing="1" border="0" width="95%" align="center">
+    <tr>
+        <td colspan="5" style="vertical-align:middle">
+            <span style="float:right">
+                {%if "username" in session%}
+                <div class="button"><a href="add_topic"><center>Создать тему</center></a></div>
+                {%else%}
+                <div class="button"><center>Ты не пройдещь!</center></div>
+                {%endif%}
+            </span>
+            <br>
+            <h1><b>{{section}}</b></h1>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width="75%"><b>Темы</b></td>
+        <td align="center" nowrap="nowrap"><b>Дата создания</b></td>
+        <td align="center" nowrap="nowrap"><b>Ответы</b></td>
+        <td align="center" nowrap="nowrap"><b>Просмотры</b></td>
+    </tr>
+    {%for i in topics%}
+    <tr>
+        <td>
+            <img src="//cyberstatic.net/images/statusicon/thread_new.gif" border=""  title="жрать хочу!"/>
+        </td>
+        <td>
+            <div>
+				<span style="float:right"><img src="//cyberstatic.net/images/misc/tag.png"/></span>
+                <a href={{"/section/"+sec+"/"+str(i[0])}} style="font-weight:bold">{{i[2]}}</a>
+            </div>
+            <div style="margin: 5px 0px 0px 40px">{{i[3][:100]+"..."}}</div>
+            <div style="margin: 0px 0px 0px 40px">{{"Автор: "+i[4]}}</div>
+        </td>
+        <td>
+            <div style="text-align:right; white-space:nowrap">{{i[5]}}</div>
+        </td>
+        <td align="center"><a href="http://www.cyberforum.ru/threadposts2409373.html">{{i[6]}}</a></td>
+        <td align="center">{{i[7]}}</td>
+    </tr>
+    {%endfor%}
+</table>
+{% endblock %}

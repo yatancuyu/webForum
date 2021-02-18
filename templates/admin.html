@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{%if "username" in session%}
+    {%if session["username"] in admins%}
+    <form method="post">
+        <div align="center">
+            <table>
+                <tr>
+                    <td width="15%"><b>Имя юзера:</b></td>
+                    <td><textarea rows="1" name="user" cols="100"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="ВЫПИЛИТЬ" class="button"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    {%else%}
+        <center>Нет доступа<br>
+        <img src="//files.everypony.ru/main/old/derpygif.gif" title="Да, это пони"></center>
+    {%endif%}
+{%endif%}
+{% endblock %}

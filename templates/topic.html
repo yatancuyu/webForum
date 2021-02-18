@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<table border="solid" cellpadding="5" cellspacing="1" border="0" width="95%" align="center">
+    <tr>
+        <th width="15%">
+            <center><b>Автор</b></center>
+        </th>
+		<th width="85%">
+            <center><b>Сообщение</b></center>
+        </th>
+    </tr>
+	{%for i in messages%}
+	<tr>
+		<td align="center">
+			<b>{{i[0]}}</b><br>
+			{{i[3]}}
+		</td>
+		<td>
+			{{i[2]}}
+		</td>
+	</tr>
+	<tr><td colspan="2"><center><small>Здесь могла быть Ваша реклама!</small></center></td></tr>
+	{%endfor%}
+	<tr>
+		<td colspan="2">
+			{%if "username" in session%}
+			<b>Ваше сообщение:</b>
+			<form method="post">
+				<textarea name="message" cols="195" rows="8"></textarea><br>
+				<input type="submit" value="Послать" class="button">
+			</form>
+			{%else%}
+			<br><div class="button">Войдите в систему, чтобы оставить сообщение</div>
+			{%endif%}
+		</td>
+	</tr>
+</table>
+{% endblock %}

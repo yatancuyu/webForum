@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link href="http://mlp.kzlproject.xyz/common.css" rel="stylesheet" />
+        <title>{{title}}</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="text">
+                <a href="/main">
+                    <img src="/static/forum.png" width="100" height="50" alt="logo">
+                </a>
+            </div>
+            <div class="filler"></div>
+            {%if "username" in session%}
+                <div class="button"><a href="/del_user">ОДМЕН_ПАНЕЛЬ</a></div>
+                <div class="button"><a href="/signout">Выйти</a></div>
+            {%else%}
+                <div class="text"><a href="/signin">Войти</a></div>
+                <div class="button"><a href="/signup">Зарегистрироваться</a></div>
+            {%endif%}
+        </header>
+        <main class="content">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
+</html>

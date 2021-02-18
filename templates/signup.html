@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div align="center">
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username }}<br>
+        {% for error in form.username.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password }}<br>
+        {% for error in form.password.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.password_check.label }}<br>
+        {{ form.password_check }}<br>
+        {% for error in form.password_check.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <p>
+        {{ form.question.label }}<br>
+        {{ form.question }}<br>
+    </p>
+    <p>
+        {{ form.answer.label }}<br>
+        {{ form.answer }}<br>
+        {% for error in form.answer.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endfor %}
+    </p>
+    <br>
+    <p>{{ form.submit() }}</p>
+    {% if title =="Авторизация" %}
+    <a href="/signup">Зарегистрироваться</a>
+    {% endif %}
+</form>
+</div>
+{% endblock %}

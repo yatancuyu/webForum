@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="filler">
+    <center><br><p>Добро пожаловать на наш Форум! Надеемся, что здесь вы сможете найти единомышленников, друзей, а может быть и любовь. :)</p><br></center>
+</div>
+<table border="solid" width="75%" align="center">
+    <tr>
+        <th width="15%">Фото</th>
+        <th width="75%">Тема</th>
+    </tr>
+    {%for i in sections%}
+    <tr>
+        <td>
+            <a href={{"/section/"+i[2]}}><img src={{i[3]}} width = "100%" alt={{i[3]}} align="right"></a>
+        </td>
+        <td>
+            <a href={{"/section/"+i[2]}}><strong>{{i[0]}}</strong></a><br>
+            {{i[1]}}
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+{% endblock %}
